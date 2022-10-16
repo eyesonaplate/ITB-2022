@@ -1,0 +1,15 @@
+#step1. chipotle.csv 파일 가져오기
+chi = pd.read_csv("/content/drive/My Drive/Colab Notebooks/ITB 2022/chipotle.csv", encoding='cp949')
+
+#step2. 정보 확인하기
+display(chi.head(5))
+print(chi.info()) 
+
+#step3 문제1.주문량이 가장 적은 메뉴 10개 보여주기
+order_quantity = chi.groupby('item_name')['quantity'].sum()
+order_sorted = order_quantity.sort_values(ascending=True)[:10]
+print(order_sorted)
+
+#step4. 문제2.가격이 가장 저렴한 메뉴 5개 보여주기
+price_per_item = chi.groupby('item_name')['item_price'].min() 
+print(price_per_item.sort_values(ascending = True)[:5])
